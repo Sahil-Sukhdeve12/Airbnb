@@ -52,7 +52,7 @@ app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public"))); //to use static files
 
 app.get("/",(req,res)=>{
-    res.render("listing/index.ejs");
+    res.render("listing/index");
 });
 
 const store = MongoStore.create({
