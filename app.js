@@ -51,9 +51,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public"))); //to use static files
 
-app.get("/",(req,res)=>{
-    res.render("listing/index");
-});
+
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
@@ -110,6 +108,10 @@ app.use((req,res,next)=>{
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
+
+app.get("/",(req,res)=>{
+    res.render("listing/index.ejs",{listing});
+});
 
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"Page Not Found!"));
