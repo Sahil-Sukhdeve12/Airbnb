@@ -110,7 +110,8 @@ app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
 app.get("/",(req,res)=>{
-    res.render("listing/index.ejs");
+    const allListings=await Listing.find({});
+    res.render("listings/index.ejs",{allListings});
 });
 
 app.all("*",(req,res,next)=>{
