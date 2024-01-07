@@ -51,9 +51,9 @@ app.use(methodOverride("_method"));
 app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public"))); //to use static files
 
-// app.get("/",(req,res)=>{
-//     res.send("hi i am root");
-// });
+app.get("/",(req,res)=>{
+    res.render("listing/index.ejs");
+});
 
 const store = MongoStore.create({
     mongoUrl: dbUrl,
