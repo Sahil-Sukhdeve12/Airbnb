@@ -12,7 +12,7 @@ const path=require("path");
 const methodOverride = require("method-override");
 const ejsMate=require("ejs-mate");
 const dbUrl=process.env.ATLASDB_URL; 
-console.log(dbUrl);
+// console.log(dbUrl);
  //const MONGO_URL='mongodb://127.0.0.1:27017/wanderlust';
  
 
@@ -96,22 +96,15 @@ app.use((req,res,next)=>{
     next();
 });
 
-// app.get("/demouser",async(req,res)=>{
-//     let fakeuser=new User({
-//         email:"student@gmail.com",
-//         username:"student",
-//     });
-//     let newuser=await User.register(fakeuser,"hello world");
-//     res.send(newuser);
-// });
-
 app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
-app.get("/",(req,res)=>{
-    res.render("listing/index.ejs");
+app.get("/",async(req,res)=>{
+    const allListings=await Listing.find({});
+    res.render("listings/index.ejs",{allListings});
 });
+
 
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"Page Not Found!"));
