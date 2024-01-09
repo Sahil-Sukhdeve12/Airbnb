@@ -94,6 +94,14 @@ app.use("/listings",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
+<<<<<<< HEAD
+=======
+// app.get("/",async(req,res)=>{
+//     const allListings=await Listing.find({});
+//     res.render("listings/index.ejs",{allListings});
+// });
+
+>>>>>>> d06b1f2d6376765197ff609e12014d9c0b3e3a3f
 app.all("*",(req,res,next)=>{
     next(new ExpressError(404,"Page Not Found!"));
 });
