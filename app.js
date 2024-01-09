@@ -1,6 +1,6 @@
 if(process.env.NODE_ENV!="production"){
-    require('dotenv').config();
-}
+    require('dotenv').config()              ;
+}           
 
 const express=require("express");
 const app=express();
@@ -10,7 +10,7 @@ const Listing=require("./models/listing.js");
 const path=require("path");
 const methodOverride = require("method-override");
 const ejsMate=require("ejs-mate");
-const dbUrl=process.env.ATLASDB_URL; 
+
 
 const wrapAsync=require("./utils/wrapAsync.js");
 const ExpressError=require("./utils/ExpressError.js");
@@ -25,7 +25,8 @@ const User=require("./models/user.js");
 const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js");
 const userRouter=require("./routes/user.js");
-const {error}=require("console");
+ 
+const dbUrl=process.env.ATLASDB_URL; 
 
 main()
     .then(()=>{
@@ -100,7 +101,7 @@ app.all("*",(req,res,next)=>{
 
 app.use((err,req,res,next)=>{
     let{statusCode=500,message="something went wrong!!"}=err;
-    res.status(statusCode).render("error.ejs",{message});
+    res.status(statusCode).render("listings/error.ejs",{message});
 });
 
 app.listen(8000,()=>{
