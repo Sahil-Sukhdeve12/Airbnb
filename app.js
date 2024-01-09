@@ -88,7 +88,7 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.use("/listings",listingRouter);
+app.use("/",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
@@ -98,7 +98,7 @@ app.all("*",(req,res,next)=>{
 
 app.use((err,req,res,next)=>{
     let{statusCode=500,message="something went wrong!!"}=err;
-    res.status(statusCode).render("error.ejs",{message});
+    res.status(statusCode).render("listings/error.ejs",{message});
 });
 
 app.listen(8000,()=>{
