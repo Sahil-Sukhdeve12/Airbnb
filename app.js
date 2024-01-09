@@ -66,8 +66,7 @@ const sessionOptions={
     resave:false,
     saveUninitialized:true,
     cookie:{
-        // httpOnly:true,
-        //secure : true,
+        secure : true,
         expires:Date.now()+7*24*60*60*1000, //ms
         maxAge:7*24*60*60*1000,
         httpOnly:true,
@@ -91,7 +90,7 @@ app.use((req,res,next)=>{
     next();
 });
 
-app.use("/listings",listingRouter);
+app.use("/",listingRouter);
 app.use("/listings/:id/reviews",reviewRouter);
 app.use("/",userRouter);
 
@@ -101,6 +100,7 @@ app.all("*",(req,res,next)=>{
 
 app.use((err,req,res,next)=>{
     let{statusCode=500,message="something went wrong!!"}=err;
+    res.status(statusCode).render("listings/error.ejs",{message});
     res.status(statusCode).render("listings/error.ejs",{message});
 });
 
