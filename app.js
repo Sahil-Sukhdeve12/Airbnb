@@ -69,7 +69,7 @@ const sessionOptions={
     resave:false,
     saveUninitialized:true,
     cookie:{
-        secure : true,
+        // secure : true,
         expires:Date.now()+7*24*60*60*1000, //ms
         maxAge:7*24*60*60*1000,
         httpOnly:true,
@@ -104,6 +104,7 @@ app.all("*",(req,res,next)=>{
 app.use((err,req,res,next)=>{
     let{statusCode=500,message="something went wrong!!"}=err;
     res.status(statusCode).render("listings/error.ejs",{message});
+
 });
 
 app.listen(8000,()=>{
