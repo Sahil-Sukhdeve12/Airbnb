@@ -11,7 +11,6 @@ const path=require("path");
 const methodOverride = require("method-override");
 const ejsMate=require("ejs-mate");
 
-
 const wrapAsync=require("./utils/wrapAsync.js");
 const ExpressError=require("./utils/ExpressError.js");
 const session=require("express-session");
@@ -29,7 +28,6 @@ const userRouter=require("./routes/user.js");
 const dbUrl=process.env.ATLASDB_URL; 
 // const MONGO_URL='mongodb://127.0.0.1:27017/wanderlust';
 
-
 main()
     .then(()=>{
         console.log("connected to DB");
@@ -41,7 +39,6 @@ main()
         await mongoose.connect(dbUrl);
         // await mongoose.connect(MONGO_URL);
     }
-    
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
