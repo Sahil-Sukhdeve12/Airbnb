@@ -56,6 +56,7 @@ const listingSchema=new Schema({
 
 });
 
+//Post Middleware which will executed after execution of findOneAndDelete
 listingSchema.post('findOneAndDelete',async(listing)=>{
     if(listing){
         await Review.deleteMany({_id:{$in: listing.reviews}});

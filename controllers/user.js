@@ -9,7 +9,7 @@ module.exports.signup=async(req,res)=>{
         let{username,email,password}=req.body;
         const newUser=new User({email,username});
         const registeredUser=await User.register(newUser,password);
-        console.log(registeredUser);
+        // console.log(registeredUser);
 
         req.login(registeredUser,(err)=>{
             if(err){
@@ -33,6 +33,9 @@ module.exports.login=async(req,res)=>{
     req.flash("success","welcome to wanderlust you are logged in!!");
     //res.redirect("/listings");
     let redirectUrl=res.locals.redirectUrl || "/listings";
+    if (redirectUrl.includes("DELETE")) {
+        redirectUrl = "/listings";
+    }
     res.redirect(redirectUrl);
 };
 

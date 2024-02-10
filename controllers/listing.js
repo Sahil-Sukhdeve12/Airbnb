@@ -19,7 +19,7 @@ module.exports.show=async(req,res)=>{
         req.flash("error","Listing does not exists");
         res.redirect("/listings");
     }
-    console.log(listing.geometry.coordinates);
+    // console.log(listing.geometry.coordinates);
     res.render("listings/show.ejs",{listing});
 }
 
@@ -38,9 +38,10 @@ module.exports.create=async(req,res,next)=>{
     newListing.image={url,filename};
 
     newListing.geometry=response.body.features[0].geometry;
-    
-    let savedListing=await newListing.save();
-    console.log(savedListing);
+
+    await newListing.save();
+    // let savedListing=await newListing.save();
+    // console.log(savedListing);
 
     req.flash("success","new Listing Created!");
     res.redirect("/listings");
