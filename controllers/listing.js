@@ -14,12 +14,12 @@ module.exports.renderNewForm=(req,res)=>{
 
 module.exports.show=async(req,res)=>{
     let {id}=req.params;
-    const listing=await Listing.findById(id).populate({path:"reviews",populate:{path:"author",},}).populate("owner");
+    const listing=await Listing.findById(id).populate({path:"reviews",populate:{path:"author"}}).populate("owner");
     if(!listing){
         req.flash("error","Listing does not exists");
         res.redirect("/listings");
     }
-    console.log(listing);
+    console.log(listing.geometry.coordinates);
     res.render("listings/show.ejs",{listing});
 }
 
@@ -38,6 +38,7 @@ module.exports.create=async(req,res,next)=>{
     newListing.image={url,filename};
 
     newListing.geometry=response.body.features[0].geometry;
+    
     let savedListing=await newListing.save();
     console.log(savedListing);
 
